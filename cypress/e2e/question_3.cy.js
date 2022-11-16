@@ -82,12 +82,12 @@ describe('Registration user interaction', () => {
         cy.get('[data-test-name="submit-button"]').click()
       })
 
-      it('Registration form with Step 1 completed should be visible', () => {
+      it('Registration form with Step 1 completed and Step 2 in green should be visible', () => {
         cy.get('form').should('be.visible')
-        cy.get('[data-test-name="progress-bar-bubble"]').contains('2')
-        .should('have.css', 'background-color','rgb(0, 83, 29)')
         cy.get('[data-test-name="progress-bar-bubble-success"]').should('have.attr', 'data-dn','Icon')
         .and('have.attr', 'type', 'success')
+        cy.get('[data-test-name="progress-bar-bubble"]').contains('2')
+        .should('have.css', 'background-color','rgb(0, 83, 29)')
       })
 
       it('The "Join" button should be greyed out', () => {
