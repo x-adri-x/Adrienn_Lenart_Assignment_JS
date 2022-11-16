@@ -1,4 +1,8 @@
 describe('Registration user interaction', () => {
+    // I experienced some flakiness because of the Cookie acceptance popup
+    // not being displayed
+    // In some cases the test timed out, so I raised the pageLoadTimeout to 100 seconds
+
     it('Page title should equal "Join the club"', () => {
         cy.visit('https://www.unibet.co.uk/registration')
         cy.get('#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click()
@@ -17,6 +21,9 @@ describe('Registration user interaction', () => {
         .first()
         .within(() => cy.contains('Selected'))
       })
+
+      // It is not defined (rgb value or color name depending which one is used in the CSS) 
+      // what the correct colour should be. 
 
       it('I want this Offer” button should be available and in correct colour', () => {
         cy.get('[data-test-name="submit-button"]').then(el => {

@@ -6,6 +6,9 @@ describe('Test kambi-rest-api/gameLauncher2 HTTP request', () => {
     })
   })
 
+  // The API URL in test will throw an error unless brand and locale
+  // params are provided
+
   it('Should have the right parameters', () => {
     cy.intercept('/kambi-rest-api/gameLauncher2.json**').as('gameLauncher')
     cy.visit('https://www.unibet.co.uk/betting/sports/home')
@@ -14,6 +17,12 @@ describe('Test kambi-rest-api/gameLauncher2 HTTP request', () => {
         expect(obj.request.url).to.include('locale')
     })
   })
+
+  // Depending on whether I send a request with only brand and locale (necessary params) 
+  // or I intercept the one on the main site that is being fired, 
+  // the response data can be different. E.g: currency will ‘EUR’ or ‘GBP’, 
+  // offering will be ‘ub’ or ‘ubuk’.
+  // I decided next to validating the URL in production.
 
   it('Should have correct data', () => {
     cy.intercept('/kambi-rest-api/gameLauncher2.json**').as('gameLauncher')
